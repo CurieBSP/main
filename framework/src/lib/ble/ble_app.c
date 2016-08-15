@@ -75,14 +75,11 @@
 /* enable ble_app.c debug */
 /*#define BLE_APP_DEBUG */
 
-/* Default device name */
-#define BLE_DEV_NAME "Curie-"
-
 /* Connection parameters used for Peripheral Preferred Connection Parameters (PPCP) and update request */
-#define MIN_CONN_INTERVAL MSEC_TO_1_25_MS_UNITS(80)
-#define MAX_CONN_INTERVAL MSEC_TO_1_25_MS_UNITS(151)
-#define SLAVE_LATENCY 0
-#define CONN_SUP_TIMEOUT MSEC_TO_10_MS_UNITS(6000)
+#define MIN_CONN_INTERVAL MSEC_TO_1_25_MS_UNITS(CONFIG_BLE_MIN_CONN_INTERVAL)
+#define MAX_CONN_INTERVAL MSEC_TO_1_25_MS_UNITS(CONFIG_BLE_MAX_CONN_INTERVAL)
+#define SLAVE_LATENCY CONFIG_BLE_SLAVE_LATENCY
+#define CONN_SUP_TIMEOUT MSEC_TO_10_MS_UNITS(CONFIG_BLE_CONN_SUP_TIMEOUT)
 
 #define BLE_APP_APPEARANCE 192
 #define BLE_APP_MANUFACTURER 2
@@ -581,6 +578,10 @@ void ble_app_stop_advertisement(void)
 	bt_le_adv_stop();
 }
 
+__weak void on_ble_app_started(void)
+{
+}
+
 static void _ble_register_services(void)
 {
 	/* GAP_SVC */
@@ -622,6 +623,8 @@ static void _ble_register_services(void)
 	ble_uas_init();
 	pr_info(LOG_MODULE_BLE, "Registering %s", "UAS");
 #endif
+
+	on_ble_app_started();
 }
 
 static void on_connected(struct bt_conn *conn, uint8_t err)
@@ -723,7 +726,7 @@ static void handle_msg_id_ble_enable_rsp(struct cfw_message *msg)
 		if (!_ble_app_cb.device_name[0]) {
 			snprintf(_ble_app_cb.device_name,
 				 sizeof(_ble_app_cb.device_name),
-				 BLE_DEV_NAME "%02x%02x%02x%02x%02x%02x",
+				 CONFIG_BLE_DEV_NAME "%02x%02x%02x%02x%02x%02x",
 				 rsp->bd_addr.val[5], rsp->bd_addr.val[4],
 				 rsp->bd_addr.val[3],
 				 rsp->bd_addr.val[2], rsp->bd_addr.val[1],

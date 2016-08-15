@@ -41,6 +41,35 @@ config BLE_APP_USE_BAT
 	depends on SERVICES_QUARK_SE_BATTERY
 	default y if SERVICES_QUARK_SE_BATTERY
 
+menu "BLE Application Parameters"
+    depends on BLE_APP
+
+config BLE_DEV_NAME
+    string "Device Name"
+    default "Curie-"
+
+config BLE_MIN_CONN_INTERVAL
+    int "Minimum connection interval (in ms)"
+    default 80
+    range 8 4000
+
+config BLE_MAX_CONN_INTERVAL
+    int "Maximum connection interval (in ms)"
+    default 151
+    range 8 4000
+
+config BLE_SLAVE_LATENCY
+    int "Slave latency"
+    default 0
+    range 0 1000
+
+config BLE_CONN_SUP_TIMEOUT
+    int "Connection supervision timeout (in ms)"
+    default 6000
+    range 100 32000
+
+endmenu
+
 source "framework/src/lib/ble/bas/Kconfig"
 source "framework/src/lib/ble/dis/Kconfig"
 source "framework/src/lib/ble/gap/Kconfig"

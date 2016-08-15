@@ -1,5 +1,6 @@
-Intel® Curie BSP
+SDI featued Intel® Curie BSP
 ################
+This Curie BSP is Intel Curie BSP plus add-on features from Intel Smart Device Innovations team. 
 
 Intel® Curie BSP is the SDK that will help you developing software on Curie based boards, for
 example with the Arduino 101 board (AKA Genuino 101).
@@ -41,7 +42,7 @@ Create your directory (eg. Curie_BSP):
 
 Initialize your repo:
 
-``repo init -u https://github.com/CurieBSP/manifest``
+``repo init -u https://github.com/SDICurie/manifest``
 
 Download the sources files:
 

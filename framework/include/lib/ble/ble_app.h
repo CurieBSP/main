@@ -242,6 +242,15 @@ void ble_app_adv_timer_start(uint16_t timeout, ble_adv_timeout_cb_t cb);
 void ble_app_adv_timer_delete(void);
 
 /**
+ * Function that is called by the ble_app module when the initialization has
+ * completed. This function is project specific and should be implemented in
+ * the project to perform specific actions such as add BLE services.
+ *
+ *
+ */
+void on_ble_app_started(void);
+
+/**
  * @}
  */
 #endif /* BLE_APP_H_ */

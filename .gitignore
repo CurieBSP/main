@@ -33,3 +33,4 @@ external/go
 external/go-packages/src/github.com/paypal/gatt
 external/pyserial
 external/pycrypto
+sdi
